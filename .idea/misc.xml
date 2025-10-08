@@ -8,6 +8,8 @@
         <option value="$PROJECT_DIR$/order/order/pom.xml" />
         <option value="$PROJECT_DIR$/product/product/pom.xml" />
         <option value="$PROJECT_DIR$/spring.cloud/spring.cloud/pom.xml" />
+        <option value="$PROJECT_DIR$/eurekaServer/pom.xml" />
+        <option value="$PROJECT_DIR$/configServer/configServer/pom.xml" />
       </list>
     </option>
   </component>
