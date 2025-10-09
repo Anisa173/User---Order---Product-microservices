@@ -93,7 +93,7 @@ public class ProducServiceImpl implements ProductService {
 
     @Override
     public ProductResponse getProductById(Long id) throws Exception {
-        return productRepository.findById(id).map(c -> mapTOProductResponse(c))
+        return productRepository.findByIdAndByActiveTrue(id).map(c -> mapTOProductResponse(c))
                 .orElseThrow(() -> new RuntimeException("Product is not found"));
     }
 

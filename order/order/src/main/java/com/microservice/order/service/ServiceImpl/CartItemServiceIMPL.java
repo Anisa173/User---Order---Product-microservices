@@ -1,16 +1,19 @@
 package com.microservice.order.service.ServiceImpl;
 
 
+import com.microservice.order.clients.ProductHttpClientService;
+import com.microservice.order.clients.UserHttpServiceClient;
 import com.microservice.order.dto.CartItemRequest;
+import com.microservice.order.dto.ProductResponse;
 import com.microservice.order.model.CartItem;
 import com.microservice.order.repository.CartRepository;
 import com.microservice.order.service.CartItemService;
+import com.microservice.user.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -19,10 +22,17 @@ public class CartItemServiceIMPL implements CartItemService {
     private final CartRepository cartitemrepo;
     //private final UserRepository userRepo;
     //private final ProductRepository productRepo;
+    private final ProductHttpClientService productClient;
+    private final UserHttpServiceClient userClient;
 
     @Override
     public Boolean addToCartItem(String userId, CartItemRequest request) {
-
+        //Look for product
+        ProductResponse response = productClient
+                .getProductDetails(String.valueOf(request.getProductById()));
+        if ((response == null) || (response.getStockQuantity() < request.getQuantity())) {
+            return false;
+        }
         //   Optional<Product> productOpt = productRepo.findById(request.getProductById());
         // Optional<User> userOptional = null;
         //  if (productOpt.isEmpty()) {
@@ -32,6 +42,10 @@ public class CartItemServiceIMPL implements CartItemService {
         // if (product.getStockQuantity() < request.getQuantity()) {
         //    return false;
         //  }
+        UserResponse userResponse = userClient.getUserDetails(userId);
+        if (userResponse == null) {
+            return false;
+        }
 
         //userOptional = userRepo.findById(Integer.valueOf(userId));
         //if (userOptional.isEmpty()) {
