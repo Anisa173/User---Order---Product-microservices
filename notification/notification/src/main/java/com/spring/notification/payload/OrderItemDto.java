@@ -1,4 +1,4 @@
-package com.microservice.order.dto;
+package com.spring.notification.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

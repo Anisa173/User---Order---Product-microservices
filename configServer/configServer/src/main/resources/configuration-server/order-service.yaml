@@ -19,7 +19,24 @@ management:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circutbreakers:
+      enabled: true
+
+    tracing:
+      sampling:
+        propability: 1.0
+
 
 server:
   port: 8081
-
+rabbitmq:
+  exchange:
+    name: order.exchange
+  queue:
+    name: order.queue
+  routing:
+    key: order.tracking
